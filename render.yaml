@@ -1,0 +1,7 @@
+services:
+  - type: web
+    runtime: static
+    name: flowops-demo
+    buildCommand: cd demo && npm ci && npm run build
+    staticPublishPath: ./demo/dist
+    autoDeployTrigger: commit

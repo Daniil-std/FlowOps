@@ -1,0 +1,57 @@
+order_id,date,customer,product,quantity,unit_price
+FO-1040,2026-09-01,  Mira Ellis  ,Everyday notebook,1,18.5
+FO-1040,2026-09-01,Mira Ellis,Linen pencil case,4,24.00
+FO-1041,2026/09/02,Theo Bennett,Brass bookmark,2,12.00
+FO-1041,2026-09-02,Theo Bennett,Ceramic desk tray,5,32.00
+FO-1042,2026-09-03,Alex Morgan,Weekly planner,4,28.50
+FO-1042,2026-09-03,Alex Morgan,Ceramic desk tray,2,32.00
+FO-1043,2026-09-04,Lena Brooks,Weekly planner,5,28.50
+FO-1043,2026-09-04,Lena Brooks,Everyday notebook,3,18.50
+FO-1044,2026-09-05,Noah Reed,Linen pencil case,2,24.00
+FO-1044,2026-09-05,Noah Reed,Brass bookmark,5,12.00
+FO-1045,2026-09-06,Iris Hayes,Linen pencil case,3,24.00
+FO-1045,2026-09-06,Iris Hayes,Brass bookmark,1,12.00
+FO-1046,2026-09-07,Mira Ellis,Ceramic desk tray,5,32.00
+FO-1046,2026-09-07,Mira Ellis,Weekly planner,3,28.50
+FO-1047,2026-09-08,Theo Bennett,Everyday notebook,1,18.50
+FO-1047,2026-09-08,Theo Bennett,Weekly planner,4,28.50
+FO-1048,2026-09-09,Alex Morgan,Everyday notebook,3,18.50
+FO-1048,2026-09-09,Alex Morgan,Linen pencil case,1,24.00
+FO-1049,2026-09-10,Lena Brooks,Brass bookmark,4,12.00
+FO-1049,2026-09-10,Lena Brooks,Ceramic desk tray,2,32.00
+FO-1050,2026-09-11,Noah Reed,Brass bookmark,1,12.00
+FO-1050,2026-09-11,Noah Reed,Ceramic desk tray,4,32.00
+FO-1051,2026-09-12,Iris Hayes,Weekly planner,2,28.50
+FO-1051,2026-09-12,Iris Hayes,Everyday notebook,5,18.50
+FO-1052,2026-09-13,Mira Ellis,Linen pencil case,4,24.00
+FO-1052,2026-09-13,Mira Ellis,Everyday notebook,2,18.50
+FO-1053,2026-09-14,Theo Bennett,Linen pencil case,5,24.00
+FO-1053,2026-09-14,Theo Bennett,Brass bookmark,3,12.00
+FO-1054,2026-09-15,Alex Morgan,Ceramic desk tray,2,32.00
+FO-1054,2026-09-15,Alex Morgan,Weekly planner,5,28.50
+FO-1055,2026-09-16,Lena Brooks,Ceramic desk tray,3,32.00
+FO-1055,2026-09-16,Lena Brooks,Weekly planner,1,28.50
+FO-1056,2026-09-17,Noah Reed,Everyday notebook,5,18.50
+FO-1056,2026-09-17,Noah Reed,Linen pencil case,3,24.00
+FO-1057,2026-09-18,Iris Hayes,Brass bookmark,1,12.00
+FO-1057,2026-09-18,Iris Hayes,Linen pencil case,4,24.00
+FO-1058,2026-09-19,Mira Ellis,Brass bookmark,3,12.00
+FO-1058,2026-09-19,Mira Ellis,Ceramic desk tray,1,32.00
+FO-1059,2026-09-20,Theo Bennett,Weekly planner,4,28.50
+FO-1059,2026-09-20,Theo Bennett,Everyday notebook,2,18.50
+FO-1060,2026-09-21,Alex Morgan,Weekly planner,1,28.50
+FO-1060,2026-09-21,Alex Morgan,Everyday notebook,4,18.50
+FO-1061,2026-09-22,Lena Brooks,Linen pencil case,2,24.00
+FO-1061,2026-09-22,Lena Brooks,Brass bookmark,5,12.00
+FO-1062,2026-09-23,Noah Reed,Ceramic desk tray,4,32.00
+FO-1062,2026-09-23,Noah Reed,Brass bookmark,2,12.00
+FO-1063,2026-09-24,Iris Hayes,Ceramic desk tray,5,32.00
+FO-1063,2026-09-24,Iris Hayes,Weekly planner,3,28.50
+FO-1040,2026-09-01,Mira Ellis,Linen pencil case,4,24.00
+FO-1040,2026-09-01,Mira Ellis,Everyday notebook,1,18.50
+FO-9001,2026-02-30,Iris Hayes,Weekly planner,1,28.50
+FO-9002,2026-09-04,,Brass bookmark,2,12.00
+FO-9003,2026-09-05,Theo Bennett,Linen pencil case,0,24.00
+FO-9004,2026-09-06,Alex Morgan,Ceramic desk tray,1,-32.00
+FO-9010,2026-09-10,Lena Brooks,Weekly planner,1,28.50
+FO-9010,2026-09-11,Noah Reed,Brass bookmark,2,12.00

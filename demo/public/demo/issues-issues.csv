@@ -1,0 +1,9 @@
+﻿source_row,column,code,explanation
+50,row,duplicate,"Matches row 3 after normalization; excluded as a potential duplicate. If both are real identical items, combine their quantities in the source file and import again."
+51,row,normalized_duplicate,"Matches row 2 after normalization; excluded as a potential duplicate. If both are real identical items, combine their quantities in the source file and import again."
+52,date,invalid_date,day is out of range for month
+53,customer,invalid_value,A required value is missing.
+54,quantity,invalid_quantity,Quantity must be a positive whole number.
+55,unit_price,invalid_unit_price,Unit price must be non-negative with at most two decimal places.
+56,order_id,order_conflict,This order ID has different dates or customers. All its rows are excluded; correct the order identity and import again.
+57,order_id,order_conflict,This order ID has different dates or customers. All its rows are excluded; correct the order identity and import again.
