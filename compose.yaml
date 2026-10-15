@@ -1,0 +1,42 @@
+name: flowops
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: flowops
+      POSTGRES_PASSWORD: flowops
+      POSTGRES_DB: flowops
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flowops -d flowops"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg://flowops:flowops@db:5432/flowops
+      TEST_DATABASE_URL: postgresql+psycopg://flowops:flowops@db:5432/flowops
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+  frontend:
+    build: ./frontend
+    environment:
+      API_PROXY_TARGET: http://backend:8000
+    ports:
+      - "127.0.0.1:5173:5173"
+    depends_on:
+      backend:
+        condition: service_healthy
+volumes:
+  postgres_data:
+

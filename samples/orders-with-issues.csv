@@ -1,0 +1,14 @@
+order_id,date,customer,product,quantity,unit_price
+FO-2001,2026-09-01,Mira Ellis,Everyday notebook,2,18.50
+FO-2001,2026-09-01,Mira Ellis,Brass bookmark,1,12.00
+FO-2001,2026-09-01,Mira Ellis,Everyday notebook,2,18.50
+FO-2002,2026-02-30,Theo Bennett,Ceramic desk tray,1,32.00
+FO-2003,2026-09-03,,Weekly planner,1,28.50
+FO-2004,2026-09-04,Lena Brooks,Linen pencil case,0,24.00
+FO-2005,2026-09-05,Noah Reed,Brass bookmark,-2,12.00
+FO-2006,2026-09-06,Iris Hayes,Weekly planner,1,-28.50
+FO-2007,2026-09-07,Alex Morgan,Everyday notebook,two,18.50
+FO-2008,07/09/2026,Mira Ellis,Ceramic desk tray,1,32.00
+ FO-2009 ,2026/09/09, Theo Bennett ,Linen pencil case,2.0,24
+FO-2010,2026-09-10,Iris Hayes,Brass bookmark,3,12.00
+FO-2011,2026-09-11,Alex Morgan,Weekly planner,1,"28,50"
