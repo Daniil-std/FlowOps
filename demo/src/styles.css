@@ -2002,6 +2002,18 @@ select:focus-visible {
 .issues-table {
   min-width: 650px;
 }
+.history-privacy {
+  line-height: 1.7;
+  color: #516857;
+}
+.dataset-bar strong,
+.selected-file strong {
+  overflow-wrap: anywhere;
+}
+.file-link strong {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
 .issues-table code {
   white-space: nowrap;
 }

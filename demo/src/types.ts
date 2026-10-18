@@ -54,3 +54,8 @@ export interface Analytics {
   revenue_over_time: { date: string; revenue: string }[];
   top_products: { product: string; quantity: number; revenue: string }[];
 }
+
+export interface ReportResult {
+  job: ImportDetail;
+  analytics: Analytics;
+}

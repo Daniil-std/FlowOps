@@ -2,13 +2,18 @@ import {
   ChartNoAxesCombined,
   ChevronRight,
   LayoutDashboard,
+  FileUp,
+  History,
   PanelLeftClose,
   PanelLeftOpen,
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 const navigation = [
-  { href: '#/demo/clean', label: 'Sales report', icon: LayoutDashboard, page: 'demo' },
+  { href: '#/', label: 'Overview', icon: LayoutDashboard, page: 'overview' },
+  { href: '#/import', label: 'Import data', icon: FileUp, page: 'import' },
+  { href: '#/history', label: 'Processing history', icon: History, page: 'history' },
+  { href: '#/demo/clean', label: 'Explore demo', icon: ChartNoAxesCombined, page: 'demo' },
 ];
 
 export function Layout({ page, children }: { page: string; children: React.ReactNode }) {
@@ -41,7 +46,7 @@ export function Layout({ page, children }: { page: string; children: React.React
   useEffect(() => {
     if (open) sidebar.current?.querySelector<HTMLAnchorElement>('a')?.focus();
   }, [open]);
-  const active = page === 'result' || page === 'demo' ? 'overview' : page;
+  const active = page === 'result' ? 'overview' : page;
   return (
     <div className="app-shell">
       {open && (
@@ -56,7 +61,7 @@ export function Layout({ page, children }: { page: string; children: React.React
         className={`sidebar ${open ? 'sidebar-open' : ''}`}
         aria-label="Main navigation"
       >
-        <a href="#/demo/clean" className="brand" aria-label="FlowOps home" onClick={() => setOpen(false)}>
+        <a href="#/" className="brand" aria-label="FlowOps home" onClick={() => setOpen(false)}>
           <img src="/favicon.svg" alt="" />
           <span>
             FlowOps<span className="brand-dot">.</span>
@@ -66,7 +71,7 @@ export function Layout({ page, children }: { page: string; children: React.React
           <span className="workspace-avatar">F</span>
           <div>
             <strong>Sales workspace</strong>
-            <span>Public portfolio demo</span>
+            <span>Browser workspace</span>
           </div>
         </div>
         <p className="nav-label">WORKSPACE</p>
@@ -89,8 +94,8 @@ export function Layout({ page, children }: { page: string; children: React.React
           <div className="demo-identity">
             <span className="demo-avatar">FO</span>
             <div>
-              <strong>FlowOps demo</strong>
-              <span>Fictional data only</span>
+              <strong>Your files stay here</strong>
+              <span>Processed on this device</span>
             </div>
             <span className="online-dot" />
           </div>
@@ -111,10 +116,14 @@ export function Layout({ page, children }: { page: string; children: React.React
             <ChartNoAxesCombined size={17} />
             <span>Workspace</span>
             <ChevronRight size={14} />
-            <strong>Explore demo</strong>
+            <strong>
+              {page === 'result'
+                ? 'Sales report'
+                : navigation.find((item) => item.page === page)?.label}
+            </strong>
           </div>
           <span className="local-tag">
-            <span className="online-dot" /> Portfolio demo
+            <span className="online-dot" /> Browser workspace
           </span>
         </header>
         <main id="main-content" className="main-content" tabIndex={-1}>
@@ -124,7 +133,7 @@ export function Layout({ page, children }: { page: string; children: React.React
           <span>
             FlowOps <span className="footer-separator">/</span> A little less spreadsheet work.
           </span>
-          <span>Fictional data · v0.1.0</span>
+          <span>Local processing · No file uploads</span>
         </footer>
       </div>
     </div>

@@ -1,25 +1,79 @@
 # FlowOps
 
-FlowOps turns a sales spreadsheet into a clean order dataset and an interactive report. Upload a CSV or Excel file, review rows that need attention, and download the cleaned data or an issues CSV.
+FlowOps turns a sales spreadsheet into cleaned order data and an interactive report. Review excluded rows, inspect changes, explore sales charts, and download the results.
 
-**Want to see it first?** Click **Explore demo**. Then switch to **Example with issues** to see how FlowOps handles duplicates, invalid values, and conflicting orders. Demo views do not appear in import history.
+[Open FlowOps](https://flowops-d7cs.onrender.com) or try the prepared fictional examples. Examples do not appear in import history.
 
-## Run locally
+## Two versions
 
-With Docker Desktop running, open a terminal in the project folder:
+| | Public browser app | Local full stack app |
+| --- | --- | --- |
+| Source | `demo/` | `frontend/` and `backend/` |
+| Processing | Web Worker on your device | Python in FastAPI |
+| File transfer | Files stay in the browser | Files are sent to your local API |
+| History | Last 10 reports in IndexedDB | Reports in PostgreSQL |
+| Delete reports | Individual deletion or clear history | No deletion screen |
+| Hosting | Render Static Site | Docker Compose or local services |
 
-```powershell
+The browser app needs no account or backend. History is specific to the browser and site address; it is not synced or backed up. Clearing site data, private browsing, or storage eviction can remove it. If saving fails, the report remains usable in the current tab and FlowOps shows a warning. Download anything you want to keep.
+
+The local app is a single-user portfolio project with no authentication or user isolation. Do not expose its API as a public upload service. Raw files are not retained; stored reports include cleaned data, issues, and changes. Issue messages may include submitted values.
+
+## Input rules
+
+Choose USD, EUR, GBP, or PLN for the whole file. FlowOps does not detect or convert currencies.
+
+```csv
+order_id,date,customer,product,quantity,unit_price
+FO-001,2026-09-01,Mira Ellis,Notebook,2,18.50
+FO-001,2026-09-01,Mira Ellis,Bookmark,1,12.00
+```
+
+With USD selected, this gives 49.00 USD in revenue, 1 order, and 3 units.
+
+- UTF-8 comma-separated CSV or one-sheet XLSX, up to **5 MiB (5,242,880 bytes)** and **10,000 data rows**.
+- Exactly the six columns above, in any order. Header casing and surrounding spaces are normalized.
+- Dates: `YYYY-MM-DD`, `YYYY/MM/DD`, or an Excel date without a time.
+- Quantity: a positive whole number. Unit price: a non-negative number representable to two decimal places. Trailing zeros are allowed. Both are limited to 1,000,000.
+- Use decimal points. Grouped values such as `1,234.50` are accepted; ambiguous separators such as `1,234` are rejected. Quote values containing commas in CSV.
+- Each value is required and may contain up to 200 characters. Excel formulas are excluded. Expanded XLSX content is limited to 50 MiB and 200 archive entries.
+
+FlowOps trims surrounding spaces and normalizes dates and numbers before comparing rows. It keeps the first matching row and lists later copies as potential duplicates. Without a line ID, genuinely identical items look like duplicates; combine their quantities in the source file if both should count.
+
+An `order_id` must have the same date and customer on every line. Conflicts exclude all rows for that order, including conflicts on otherwise invalid items. IDs and names remain case-sensitive. Invalid rows are not also counted as duplicates, and one row may have several issues.
+
+The report shows accepted rows in **Cleaned data**, exclusions in **Issues**, and normalization of accepted rows in **Changes**. Search and pagination help review larger files. Fix the original file and import it again to create a new report.
+
+Cleaned CSV and XLSX keep the six-column schema. Export names include the currency; select it again when reimporting. CSV exports prefix formula-like text with an apostrophe. XLSX keeps it as literal text. Issues CSV includes source row, column, issue code, and explanation.
+
+Taxes, refunds, currency conversion, and large background jobs are outside the project scope. All prepared examples are fictional.
+
+## Run the browser app
+
+Use Node.js 22.13+ (22.x) or 24+:
+
+```sh
+cd demo
+npm ci
+npm run dev
+```
+
+Open [localhost:5173](http://localhost:5173). See [browser app notes](demo/README.md) for the production build and Render settings.
+
+## Run the local full stack app
+
+With Docker Desktop running, from the repository root:
+
+```sh
 docker compose up --build
 ```
 
-Open [localhost:5173](http://localhost:5173). API docs are at [localhost:8000/docs](http://localhost:8000/docs). Migrations run automatically. `docker compose down` stops the services but keeps the database.
-
-If Docker is unavailable, use the setup below.
+Open [localhost:5173](http://localhost:5173). API docs: [localhost:8000/docs](http://localhost:8000/docs). Migrations run automatically. `docker compose down` keeps the database volume. Stop the browser app first if it uses the same port.
 
 <details>
 <summary>Run without Docker</summary>
 
-Install Python 3.13, Node.js 22.13+ or 24+, and PostgreSQL 17. Create a local database and user, then update the connection string:
+Install Python 3.13, Node.js 22.13+ (22.x) or 24+, and PostgreSQL 17. Create a local database and user, then set the connection string. In PowerShell:
 
 ```powershell
 py -3.13 -m venv .venv
@@ -34,78 +88,46 @@ uvicorn app.main:app --host 127.0.0.1 --reload
 
 In another terminal:
 
-```powershell
+```sh
 cd frontend
 npm ci
 npm run dev -- --host 127.0.0.1
 ```
 
+Older PostgreSQL reports retain their original results and show a legacy notice. Reimport the source to select a currency and apply the current rules.
+
 </details>
 
-## Try an import
+## Checks and source archive
 
-Select one currency for the whole file: USD, EUR, GBP, or PLN. FlowOps does not detect or convert currencies.
+In each of `demo/` and `frontend/`, run:
 
-```csv
-order_id,date,customer,product,quantity,unit_price
-FO-001,2026-09-01,Mira Ellis,Notebook,2,18.50
-FO-001,2026-09-01,Mira Ellis,Bookmark,1,12.00
+```sh
+npm run typecheck
+npm run lint
+npm run format:check
+npm test
+npm run build
 ```
 
-With USD selected, this produces **49.00 USD in revenue, 1 order, and 3 units sold**.
+With the backend Python environment active, run from `backend/`:
 
-The fictional demo produces 3,445.00 USD in revenue from 48 valid lines. Its version with issues contains 56 lines: 48 accepted, 2 duplicates, and 6 invalid.
-
-FlowOps accepts UTF-8 CSV and single-sheet XLSX files up to **5 MB or 10,000 lines**. Files need the six columns shown above. Dates can use `YYYY-MM-DD`, `YYYY/MM/DD`, or an Excel date without a time. Quantities must be positive whole numbers; prices must be non-negative numbers with no more than two decimal places. Excel formulas are excluded.
-
-## How rows are reviewed
-
-- FlowOps normalizes spaces, dates, and numbers before comparing rows. If all six fields match, it keeps the first valid row and lists later copies as potential duplicates.
-- Because the file has no line ID, two genuinely identical items look like a duplicate. If both should count, combine their quantities in the source file and import again.
-- An `order_id` must have the same date and customer on every line. If they conflict, all rows for that order are excluded.
-- Invalid rows are not counted again as duplicates. One row can have more than one issue.
-
-Download **Issues CSV** to see the source row, affected column, issue code, and explanation. Fix the original file and import it again; existing reports are not changed. Cleaned CSV and XLSX downloads keep the original six-column structure.
-
-Older imports remain available with a legacy notice and no assigned currency. Reimport the original file to use the current rules.
-
-## Checks
-
-With the Python environment active, run from `backend`:
-
-```powershell
-$env:TEST_DATABASE_URL = $env:DATABASE_URL
+```sh
 pytest -q
 ruff check .
 ruff format --check .
 mypy app
-alembic upgrade head
-alembic check
 ```
 
-Run from `frontend`:
+Integration tests need `TEST_DATABASE_URL` pointing to a disposable PostgreSQL database with schema-creation permission. Otherwise they are skipped. CI supplies PostgreSQL and checks migrations. See [QA notes](docs/QA.md) for executed checks and browser instructions.
 
-```powershell
-npm test
-npm run typecheck
-npm run lint
-npm run format:check
-npm run build
+From the root:
+
+```sh
+python -m unittest discover -s scripts -p "test_*.py"
+python scripts/package_source.py
 ```
 
-Integration tests need PostgreSQL and permission to create schemas. Without `TEST_DATABASE_URL`, they are skipped. CI runs the checks with PostgreSQL. See [QA notes](docs/QA.md) for browser checks and their limits.
+The archive at `artifacts/flowops-source.zip` includes both apps, fictional examples, and `render.yaml`. It excludes dependencies, builds, caches, credentials, environment files, and local data directories. Filename filters cannot detect secrets embedded in source; review source content before sharing.
 
-## Project notes
-
-The frontend uses React and TypeScript. FastAPI processes uploads and exports, while PostgreSQL stores validated rows, issues, and changes. Raw files are not retained, although issue messages may contain submitted values.
-
-This is a **local, single-user portfolio project**. It has no accounts, separation between users, retention policy, or deletion screen. Use fictional data and do not publish this configuration as a public upload service. Taxes, refunds, currency conversion, and large background jobs are outside its scope.
-
-See the [case study](docs/CASE_STUDY.md) and [screenshots](docs/screenshots/). To create a source ZIP, run from the project root:
-
-```powershell
-py -3.13 -m unittest discover -s scripts -p "test_*.py"
-py -3.13 scripts/package_source.py
-```
-
-The ZIP is saved to `artifacts/flowops-source.zip`. Check it before sharing; file filters cannot detect secrets written inside source files.
+See the [case study](docs/CASE_STUDY.md) for the project scope.

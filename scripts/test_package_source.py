@@ -10,7 +10,22 @@ class PackagingTest(unittest.TestCase):
     def test_archive_excludes_dependencies_data_and_credentials_without_deleting(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            included = ["README.md", "frontend/src/App.tsx", "backend/app/main.py"]
+            included = [
+                "README.md",
+                "render.yaml",
+                "frontend/src/App.tsx",
+                "backend/app/main.py",
+                "demo/src/App.tsx",
+                "demo/src/processing/processor.worker.ts",
+                "demo/package.json",
+                "demo/package-lock.json",
+                "demo/.prettierrc.json",
+                "demo/.prettierignore",
+                "frontend/.prettierignore",
+                "demo/public/demo/clean-cleaned.xlsx",
+                "demo/public/demo/issues-cleaned.xlsx",
+                "demo/public/demo/clean.json",
+            ]
             excluded = [
                 ".git/config",
                 ".venv/site.py",
@@ -25,6 +40,16 @@ class PackagingTest(unittest.TestCase):
                 "backend/data.sqlite",
                 "backend/database.sql",
                 "backend/.mypy_cache/state.json",
+                "demo/node_modules/pkg/index.js",
+                "demo/dist/index.html",
+                "demo/.env.production",
+                "demo/data/orders.csv",
+                "demo/uploads/orders.json",
+                "demo/local-data/orders.csv",
+                "demo/artifacts/browser-qa.json",
+                "demo/report.xlsx",
+                "demo/tsconfig.tsbuildinfo",
+                "demo/auth-token.json",
             ]
             for name in included + excluded:
                 path = root / name

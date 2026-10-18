@@ -5,8 +5,14 @@ from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 
 ROOT = Path(__file__).resolve().parents[1]
-ROOT_FILES = {"README.md", "compose.yaml", ".gitignore", ".gitattributes"}
-SOURCE_DIRS = {"backend", "frontend", "samples", "docs", "scripts", ".github"}
+ROOT_FILES = {
+    "README.md",
+    "compose.yaml",
+    "render.yaml",
+    ".gitignore",
+    ".gitattributes",
+}
+SOURCE_DIRS = {"backend", "frontend", "demo", "samples", "docs", "scripts", ".github"}
 EXCLUDED = {
     ".git",
     ".venv",
@@ -25,6 +31,12 @@ EXCLUDED = {
     "artifacts",
     ".idea",
     ".vscode",
+    "data",
+    "local-data",
+    "uploads",
+    ".cache",
+    ".local",
+    "tmp",
 }
 EXTENSIONS = {
     ".py",
@@ -71,7 +83,19 @@ def source_files(root: Path) -> list[Path]:
             # A file allowlist also omits databases, keys, logs, archives and env files.
             if name.startswith(".env"):
                 continue
-            if path.suffix.lower() in EXTENSIONS or name in {"Dockerfile", ".dockerignore"}:
+            # Only the prepared fictional workbooks belong in the source archive.
+            if path.suffix.lower() == ".xlsx":
+                if path.relative_to(root).as_posix() in {
+                    "demo/public/demo/clean-cleaned.xlsx",
+                    "demo/public/demo/issues-cleaned.xlsx",
+                }:
+                    selected.append(path)
+                continue
+            if path.suffix.lower() in EXTENSIONS or name in {
+                "Dockerfile",
+                ".dockerignore",
+                ".prettierignore",
+            }:
                 if any(word in name.lower() for word in ("secret", "credential", "token")):
                     continue
                 selected.append(path)

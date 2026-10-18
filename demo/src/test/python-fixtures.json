@@ -1,0 +1,3261 @@
+[
+  {
+    "name": "literal-ids",
+    "filename": "literal-ids.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwxOC41MA0KMDAyLDIwMjYvMDkvMDIsTkEsTlVMTCwrMy4wLDANCg==",
+    "expected": {
+      "total_rows": 2,
+      "invalid_rows": 0,
+      "duplicate_rows": 0,
+      "normalized_rows": 1,
+      "status": "ready",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "001",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 3,
+          "order_id": "002",
+          "date": "2026-09-02",
+          "customer": "NA",
+          "product": "NULL",
+          "quantity": 3,
+          "unit_price": "0.00"
+        }
+      ],
+      "issues": [],
+      "changes": [
+        {
+          "row": 3,
+          "column": "date",
+          "code": "format",
+          "message": "Normalized 2026/09/02 to 2026-09-02."
+        },
+        {
+          "row": 3,
+          "column": "quantity",
+          "code": "format",
+          "message": "Normalized +3.0 to 3."
+        },
+        {
+          "row": 3,
+          "column": "unit_price",
+          "code": "format",
+          "message": "Normalized 0 to 0.00."
+        }
+      ],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "37.00",
+      "orders": 2,
+      "average_order_value": "18.50",
+      "units": 5,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "37.00"
+        },
+        {
+          "date": "2026-09-02",
+          "revenue": "0.00"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "NULL",
+          "quantity": 3,
+          "revenue": "0.00"
+        },
+        {
+          "product": "Notebook",
+          "quantity": 2,
+          "revenue": "37.00"
+        }
+      ]
+    }
+  },
+  {
+    "name": "normalization",
+    "filename": "normalization.csv",
+    "content": "77u/IE9SREVSX0lEICwgREFURSAsIENVU1RPTUVSICwgUFJPRFVDVCAsIFFVQU5USVRZICwgVU5JVF9QUklDRSANCiAwMDEgLDIwMjYvMDkvMDEsIE1pcmEgLCBOb3RlYm9vayAsKzIuMCwiMSwyMzQuNTAiDQowMDEsMjAyNi0wOS0wMSxNaXJhLE5vdGVib29rLDIsMTIzNC41MA0K",
+    "expected": {
+      "total_rows": 2,
+      "invalid_rows": 0,
+      "duplicate_rows": 1,
+      "normalized_rows": 1,
+      "status": "needs_review",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "001",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 2,
+          "unit_price": "1234.50"
+        }
+      ],
+      "issues": [
+        {
+          "row": 3,
+          "column": "row",
+          "code": "normalized_duplicate"
+        }
+      ],
+      "changes": [
+        {
+          "row": 2,
+          "column": "order_id",
+          "code": "whitespace",
+          "message": "Trimmed surrounding whitespace."
+        },
+        {
+          "row": 2,
+          "column": "date",
+          "code": "format",
+          "message": "Normalized 2026/09/01 to 2026-09-01."
+        },
+        {
+          "row": 2,
+          "column": "customer",
+          "code": "whitespace",
+          "message": "Trimmed surrounding whitespace."
+        },
+        {
+          "row": 2,
+          "column": "product",
+          "code": "whitespace",
+          "message": "Trimmed surrounding whitespace."
+        },
+        {
+          "row": 2,
+          "column": "quantity",
+          "code": "format",
+          "message": "Normalized +2.0 to 2."
+        },
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "format",
+          "message": "Normalized 1,234.50 to 1234.50."
+        }
+      ],
+      "column_changes": [
+        "Column 1 normalized to order_id.",
+        "Column 2 normalized to date.",
+        "Column 3 normalized to customer.",
+        "Column 4 normalized to product.",
+        "Column 5 normalized to quantity.",
+        "Column 6 normalized to unit_price."
+      ]
+    },
+    "analytics": {
+      "revenue": "2469.00",
+      "orders": 1,
+      "average_order_value": "2469.00",
+      "units": 2,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "2469.00"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Notebook",
+          "quantity": 2,
+          "revenue": "2469.00"
+        }
+      ]
+    }
+  },
+  {
+    "name": "exact-duplicates",
+    "filename": "exact-duplicates.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwxOC41MA0KMDAxLDIwMjYtMDktMDEsTWlyYSxOb3RlYm9vaywyLDE4LjUwDQowMDEsMjAyNi0wOS0wMSxNaXJhLFBsYW5uZXIsMSwyOC4wMA0K",
+    "expected": {
+      "total_rows": 3,
+      "invalid_rows": 0,
+      "duplicate_rows": 1,
+      "normalized_rows": 0,
+      "status": "needs_review",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "001",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 4,
+          "order_id": "001",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Planner",
+          "quantity": 1,
+          "unit_price": "28.00"
+        }
+      ],
+      "issues": [
+        {
+          "row": 3,
+          "column": "row",
+          "code": "duplicate"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "65.00",
+      "orders": 1,
+      "average_order_value": "65.00",
+      "units": 3,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "65.00"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Notebook",
+          "quantity": 2,
+          "revenue": "37.00"
+        },
+        {
+          "product": "Planner",
+          "quantity": 1,
+          "revenue": "28.00"
+        }
+      ]
+    }
+  },
+  {
+    "name": "conflicting-date",
+    "filename": "conflicting-date.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwxOC41MA0KMDAxLDIwMjYtMDktMDIsTWlyYSxOb3RlYm9vaywyLDE4LjUwDQowMDEsMjAyNi0wOS0wMSxNaXJhLE5vdGVib29rLDIsMTguNTANCg==",
+    "expected": {
+      "total_rows": 3,
+      "invalid_rows": 3,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "order_id",
+          "code": "order_conflict"
+        },
+        {
+          "row": 3,
+          "column": "order_id",
+          "code": "order_conflict"
+        },
+        {
+          "row": 4,
+          "column": "order_id",
+          "code": "order_conflict"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "conflicting-invalid-item",
+    "filename": "conflicting-invalid-item.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwxOC41MA0KMDAxLDIwMjYtMDktMDIsTWlyYSxOb3RlYm9vaywwLDE4LjUwDQo=",
+    "expected": {
+      "total_rows": 2,
+      "invalid_rows": 2,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "order_id",
+          "code": "order_conflict"
+        },
+        {
+          "row": 3,
+          "column": "order_id",
+          "code": "order_conflict"
+        },
+        {
+          "row": 3,
+          "column": "quantity",
+          "code": "invalid_quantity"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "conflicting-customer",
+    "filename": "conflicting-customer.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwxOC41MA0KMDAxLDIwMjYtMDktMDEsT3RoZXIsTm90ZWJvb2ssMiwxOC41MA0K",
+    "expected": {
+      "total_rows": 2,
+      "invalid_rows": 2,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "order_id",
+          "code": "order_conflict"
+        },
+        {
+          "row": 3,
+          "column": "order_id",
+          "code": "order_conflict"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "blank-and-multiline",
+    "filename": "blank-and-multiline.csv",
+    "content": "b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UKMSwyMDI2LTA5LTAxLCJNaXJhCkVsbGlzIixCb29rLDEsMgoKMixiYWQsTWlyYSxCb29rLDEsMgo=",
+    "expected": {
+      "total_rows": 3,
+      "invalid_rows": 2,
+      "duplicate_rows": 0,
+      "normalized_rows": 1,
+      "status": "needs_review",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "1",
+          "date": "2026-09-01",
+          "customer": "Mira\nEllis",
+          "product": "Book",
+          "quantity": 1,
+          "unit_price": "2.00"
+        }
+      ],
+      "issues": [
+        {
+          "row": 4,
+          "column": "customer",
+          "code": "invalid_value"
+        },
+        {
+          "row": 4,
+          "column": "date",
+          "code": "invalid_value"
+        },
+        {
+          "row": 4,
+          "column": "order_id",
+          "code": "invalid_value"
+        },
+        {
+          "row": 4,
+          "column": "product",
+          "code": "invalid_value"
+        },
+        {
+          "row": 4,
+          "column": "quantity",
+          "code": "invalid_value"
+        },
+        {
+          "row": 4,
+          "column": "unit_price",
+          "code": "invalid_value"
+        },
+        {
+          "row": 5,
+          "column": "date",
+          "code": "invalid_date"
+        }
+      ],
+      "changes": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "format",
+          "message": "Normalized 2 to 2.00."
+        }
+      ],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "2.00",
+      "orders": 1,
+      "average_order_value": "2.00",
+      "units": 1,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "2.00"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Book",
+          "quantity": 1,
+          "revenue": "2.00"
+        }
+      ]
+    }
+  },
+  {
+    "name": "decimal-rounding",
+    "filename": "decimal-rounding.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjEsMjAyNi0wOS0wMSxNaXJhLE5vdGVib29rLDEsMC4wMQ0KMiwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMSwwLjAwDQo=",
+    "expected": {
+      "total_rows": 2,
+      "invalid_rows": 0,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "ready",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "1",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 1,
+          "unit_price": "0.01"
+        },
+        {
+          "source_row": 3,
+          "order_id": "2",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 1,
+          "unit_price": "0.00"
+        }
+      ],
+      "issues": [],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.01",
+      "orders": 2,
+      "average_order_value": "0.01",
+      "units": 2,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "0.01"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Notebook",
+          "quantity": 2,
+          "revenue": "0.01"
+        }
+      ]
+    }
+  },
+  {
+    "name": "signed-zero",
+    "filename": "signed-zero.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwtMC4wMA0KMDAxLDIwMjYtMDktMDEsTWlyYSxOb3RlYm9vaywyLDANCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMywwLjAwDQo=",
+    "expected": {
+      "total_rows": 3,
+      "invalid_rows": 0,
+      "duplicate_rows": 1,
+      "normalized_rows": 1,
+      "status": "needs_review",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "001",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 2,
+          "unit_price": "0.00"
+        },
+        {
+          "source_row": 4,
+          "order_id": "001",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 3,
+          "unit_price": "0.00"
+        }
+      ],
+      "issues": [
+        {
+          "row": 3,
+          "column": "row",
+          "code": "normalized_duplicate"
+        }
+      ],
+      "changes": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "format",
+          "message": "Normalized -0.00 to 0.00."
+        }
+      ],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 1,
+      "average_order_value": "0.00",
+      "units": 5,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "0.00"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Notebook",
+          "quantity": 5,
+          "revenue": "0.00"
+        }
+      ]
+    }
+  },
+  {
+    "name": "unicode",
+    "filename": "unicode.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjEsMjAyNC0wMi0yOSzFgXVrYXN6LPCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5Oa8J+TmvCfk5rwn5OaLDAxLDAwMDEuMjAwDQo=",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 0,
+      "duplicate_rows": 0,
+      "normalized_rows": 1,
+      "status": "ready",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "1",
+          "date": "2024-02-29",
+          "customer": "Łukasz",
+          "product": "📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚",
+          "quantity": 1,
+          "unit_price": "1.20"
+        }
+      ],
+      "issues": [],
+      "changes": [
+        {
+          "row": 2,
+          "column": "quantity",
+          "code": "format",
+          "message": "Normalized 01 to 1."
+        },
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "format",
+          "message": "Normalized 0001.200 to 1.20."
+        }
+      ],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "1.20",
+      "orders": 1,
+      "average_order_value": "1.20",
+      "units": 1,
+      "revenue_over_time": [
+        {
+          "date": "2024-02-29",
+          "revenue": "1.20"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚📚",
+          "quantity": 1,
+          "revenue": "1.20"
+        }
+      ]
+    }
+  },
+  {
+    "name": "value-date-0",
+    "filename": "value-date-0.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwwMS8wOS8yMDI2LE1pcmEsTm90ZWJvb2ssMiwxOC41MA0K",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "date",
+          "code": "invalid_date"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-date-1",
+    "filename": "value-date-1.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTAyLTMwLE1pcmEsTm90ZWJvb2ssMiwxOC41MA0K",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "date",
+          "code": "invalid_date"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-date-2",
+    "filename": "value-date-2.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTAxLzAxLE1pcmEsTm90ZWJvb2ssMiwxOC41MA0K",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "date",
+          "code": "invalid_date"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-date-3",
+    "filename": "value-date-3.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTAxLTAxVDEyOjAwOjAwLE1pcmEsTm90ZWJvb2ssMiwxOC41MA0K",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "date",
+          "code": "invalid_date"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-date-4",
+    "filename": "value-date-4.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwwMDAwLTAxLTAxLE1pcmEsTm90ZWJvb2ssMiwxOC41MA0K",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "date",
+          "code": "invalid_date"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-date-5",
+    "filename": "value-date-5.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTAxLTAxVDAwOjAwOjAwLE1pcmEsTm90ZWJvb2ssMiwxOC41MA0K",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 0,
+      "duplicate_rows": 0,
+      "normalized_rows": 1,
+      "status": "ready",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "001",
+          "date": "2026-01-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        }
+      ],
+      "issues": [],
+      "changes": [
+        {
+          "row": 2,
+          "column": "date",
+          "code": "format",
+          "message": "Normalized 2026-01-01T00:00:00 to 2026-01-01."
+        }
+      ],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "37.00",
+      "orders": 1,
+      "average_order_value": "37.00",
+      "units": 2,
+      "revenue_over_time": [
+        {
+          "date": "2026-01-01",
+          "revenue": "37.00"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Notebook",
+          "quantity": 2,
+          "revenue": "37.00"
+        }
+      ]
+    }
+  },
+  {
+    "name": "value-quantity-0",
+    "filename": "value-quantity-0.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMCwxOC41MA0K",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "quantity",
+          "code": "invalid_quantity"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-quantity-1",
+    "filename": "value-quantity-1.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssLTIsMTguNTANCg==",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "quantity",
+          "code": "invalid_quantity"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-quantity-2",
+    "filename": "value-quantity-2.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMS41LDE4LjUwDQo=",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "quantity",
+          "code": "invalid_quantity"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-quantity-3",
+    "filename": "value-quantity-3.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssdGVuLDE4LjUwDQo=",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "quantity",
+          "code": "invalid_quantity"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-quantity-4",
+    "filename": "value-quantity-4.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMTAwMDAwMSwxOC41MA0K",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "quantity",
+          "code": "invalid_quantity"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-quantity-5",
+    "filename": "value-quantity-5.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMi4wMDAwMDAwMDAwMDAwMDAwMDEsMTguNTANCg==",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "quantity",
+          "code": "invalid_quantity"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-unit_price-0",
+    "filename": "value-unit_price-0.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwtMC4wMQ0K",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "invalid_unit_price"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-unit_price-1",
+    "filename": "value-unit_price-1.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMixOYU4NCg==",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "invalid_unit_price"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-unit_price-2",
+    "filename": "value-unit_price-2.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMixpbmYNCg==",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "invalid_unit_price"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-unit_price-3",
+    "filename": "value-unit_price-3.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwiMSwyMyINCg==",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "invalid_unit_price"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-unit_price-4",
+    "filename": "value-unit_price-4.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwiMSwyMzQiDQo=",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "invalid_unit_price"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-unit_price-5",
+    "filename": "value-unit_price-5.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwxLjIzNA0K",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "invalid_unit_price"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-unit_price-6",
+    "filename": "value-unit_price-6.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwxMDAwMDAxDQo=",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "invalid_unit_price"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-unit_price-7",
+    "filename": "value-unit_price-7.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwxMDAwMDAwLjAwMDAwMDAwMDENCg==",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "invalid_unit_price"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-unit_price-8",
+    "filename": "value-unit_price-8.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwxZTINCg==",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "invalid_unit_price"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-unit_price-9",
+    "filename": "value-unit_price-9.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwxLjAwMDAwMDAwMDAwMDAwMDENCg==",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "invalid_unit_price"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-product-0",
+    "filename": "value-product-0.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEseHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4LDIsMTguNTANCg==",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "product",
+          "code": "invalid_value"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "value-customer-0",
+    "filename": "value-customer-0.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLGEBYixOb3RlYm9vaywyLDE4LjUwDQo=",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "customer",
+          "code": "invalid_value"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "missing-order_id",
+    "filename": "missing-order_id.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCiAgLDIwMjYtMDktMDEsTWlyYSxOb3RlYm9vaywyLDE4LjUwDQo=",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "order_id",
+          "code": "invalid_value"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "missing-date",
+    "filename": "missing-date.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwgICxNaXJhLE5vdGVib29rLDIsMTguNTANCg==",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "date",
+          "code": "invalid_value"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "missing-customer",
+    "filename": "missing-customer.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLCAgLE5vdGVib29rLDIsMTguNTANCg==",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "customer",
+          "code": "invalid_value"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "missing-product",
+    "filename": "missing-product.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsICAsMiwxOC41MA0K",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "product",
+          "code": "invalid_value"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "missing-quantity",
+    "filename": "missing-quantity.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssICAsMTguNTANCg==",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "quantity",
+          "code": "invalid_value"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "missing-unit_price",
+    "filename": "missing-unit_price.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwgIA0K",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "invalid_value"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "missing-header",
+    "filename": "missing-header.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5DQowMDEsMjAyNi0wOS0wMSxNaXJhLE5vdGVib29rLDIsMTguNTANCg==",
+    "error": "invalid_columns"
+  },
+  {
+    "name": "extra-header",
+    "filename": "extra-header.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UsZXh0cmENCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwxOC41MA0K",
+    "error": "invalid_columns"
+  },
+  {
+    "name": "duplicate-header",
+    "filename": "duplicate-header.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LCBRVUFOVElUWSANCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwxOC41MA0K",
+    "error": "invalid_columns"
+  },
+  {
+    "name": "empty",
+    "filename": "empty.csv",
+    "content": "",
+    "error": "empty_file"
+  },
+  {
+    "name": "encoding",
+    "filename": "encoding.csv",
+    "content": "//4=",
+    "error": "invalid_encoding"
+  },
+  {
+    "name": "null",
+    "filename": "null.csv",
+    "content": "AA==",
+    "error": "malformed_csv"
+  },
+  {
+    "name": "unclosed-quote",
+    "filename": "unclosed-quote.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCiJiYWQ=",
+    "error": "malformed_csv"
+  },
+  {
+    "name": "bad-quote",
+    "filename": "bad-quote.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCiJiYWQieCwxLDIsMyw0LDU=",
+    "error": "malformed_csv"
+  },
+  {
+    "name": "extra-cell",
+    "filename": "extra-cell.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCjAwMSwyMDI2LTA5LTAxLE1pcmEsTm90ZWJvb2ssMiwxOC41MCxleHRyYQ0K",
+    "error": "malformed_row"
+  },
+  {
+    "name": "header-only",
+    "filename": "header-only.csv",
+    "content": "77u/b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCg==",
+    "error": "no_records"
+  },
+  {
+    "name": "demo-clean",
+    "filename": "demo-clean.csv",
+    "content": "b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCkZPLTEwNDAsMjAyNi0wOS0wMSxNaXJhIEVsbGlzLEV2ZXJ5ZGF5IG5vdGVib29rLDEsMTguNTANCkZPLTEwNDAsMjAyNi0wOS0wMSxNaXJhIEVsbGlzLExpbmVuIHBlbmNpbCBjYXNlLDQsMjQuMDANCkZPLTEwNDEsMjAyNi0wOS0wMixUaGVvIEJlbm5ldHQsQnJhc3MgYm9va21hcmssMiwxMi4wMA0KRk8tMTA0MSwyMDI2LTA5LTAyLFRoZW8gQmVubmV0dCxDZXJhbWljIGRlc2sgdHJheSw1LDMyLjAwDQpGTy0xMDQyLDIwMjYtMDktMDMsQWxleCBNb3JnYW4sV2Vla2x5IHBsYW5uZXIsNCwyOC41MA0KRk8tMTA0MiwyMDI2LTA5LTAzLEFsZXggTW9yZ2FuLENlcmFtaWMgZGVzayB0cmF5LDIsMzIuMDANCkZPLTEwNDMsMjAyNi0wOS0wNCxMZW5hIEJyb29rcyxXZWVrbHkgcGxhbm5lciw1LDI4LjUwDQpGTy0xMDQzLDIwMjYtMDktMDQsTGVuYSBCcm9va3MsRXZlcnlkYXkgbm90ZWJvb2ssMywxOC41MA0KRk8tMTA0NCwyMDI2LTA5LTA1LE5vYWggUmVlZCxMaW5lbiBwZW5jaWwgY2FzZSwyLDI0LjAwDQpGTy0xMDQ0LDIwMjYtMDktMDUsTm9haCBSZWVkLEJyYXNzIGJvb2ttYXJrLDUsMTIuMDANCkZPLTEwNDUsMjAyNi0wOS0wNixJcmlzIEhheWVzLExpbmVuIHBlbmNpbCBjYXNlLDMsMjQuMDANCkZPLTEwNDUsMjAyNi0wOS0wNixJcmlzIEhheWVzLEJyYXNzIGJvb2ttYXJrLDEsMTIuMDANCkZPLTEwNDYsMjAyNi0wOS0wNyxNaXJhIEVsbGlzLENlcmFtaWMgZGVzayB0cmF5LDUsMzIuMDANCkZPLTEwNDYsMjAyNi0wOS0wNyxNaXJhIEVsbGlzLFdlZWtseSBwbGFubmVyLDMsMjguNTANCkZPLTEwNDcsMjAyNi0wOS0wOCxUaGVvIEJlbm5ldHQsRXZlcnlkYXkgbm90ZWJvb2ssMSwxOC41MA0KRk8tMTA0NywyMDI2LTA5LTA4LFRoZW8gQmVubmV0dCxXZWVrbHkgcGxhbm5lciw0LDI4LjUwDQpGTy0xMDQ4LDIwMjYtMDktMDksQWxleCBNb3JnYW4sRXZlcnlkYXkgbm90ZWJvb2ssMywxOC41MA0KRk8tMTA0OCwyMDI2LTA5LTA5LEFsZXggTW9yZ2FuLExpbmVuIHBlbmNpbCBjYXNlLDEsMjQuMDANCkZPLTEwNDksMjAyNi0wOS0xMCxMZW5hIEJyb29rcyxCcmFzcyBib29rbWFyayw0LDEyLjAwDQpGTy0xMDQ5LDIwMjYtMDktMTAsTGVuYSBCcm9va3MsQ2VyYW1pYyBkZXNrIHRyYXksMiwzMi4wMA0KRk8tMTA1MCwyMDI2LTA5LTExLE5vYWggUmVlZCxCcmFzcyBib29rbWFyaywxLDEyLjAwDQpGTy0xMDUwLDIwMjYtMDktMTEsTm9haCBSZWVkLENlcmFtaWMgZGVzayB0cmF5LDQsMzIuMDANCkZPLTEwNTEsMjAyNi0wOS0xMixJcmlzIEhheWVzLFdlZWtseSBwbGFubmVyLDIsMjguNTANCkZPLTEwNTEsMjAyNi0wOS0xMixJcmlzIEhheWVzLEV2ZXJ5ZGF5IG5vdGVib29rLDUsMTguNTANCkZPLTEwNTIsMjAyNi0wOS0xMyxNaXJhIEVsbGlzLExpbmVuIHBlbmNpbCBjYXNlLDQsMjQuMDANCkZPLTEwNTIsMjAyNi0wOS0xMyxNaXJhIEVsbGlzLEV2ZXJ5ZGF5IG5vdGVib29rLDIsMTguNTANCkZPLTEwNTMsMjAyNi0wOS0xNCxUaGVvIEJlbm5ldHQsTGluZW4gcGVuY2lsIGNhc2UsNSwyNC4wMA0KRk8tMTA1MywyMDI2LTA5LTE0LFRoZW8gQmVubmV0dCxCcmFzcyBib29rbWFyaywzLDEyLjAwDQpGTy0xMDU0LDIwMjYtMDktMTUsQWxleCBNb3JnYW4sQ2VyYW1pYyBkZXNrIHRyYXksMiwzMi4wMA0KRk8tMTA1NCwyMDI2LTA5LTE1LEFsZXggTW9yZ2FuLFdlZWtseSBwbGFubmVyLDUsMjguNTANCkZPLTEwNTUsMjAyNi0wOS0xNixMZW5hIEJyb29rcyxDZXJhbWljIGRlc2sgdHJheSwzLDMyLjAwDQpGTy0xMDU1LDIwMjYtMDktMTYsTGVuYSBCcm9va3MsV2Vla2x5IHBsYW5uZXIsMSwyOC41MA0KRk8tMTA1NiwyMDI2LTA5LTE3LE5vYWggUmVlZCxFdmVyeWRheSBub3RlYm9vayw1LDE4LjUwDQpGTy0xMDU2LDIwMjYtMDktMTcsTm9haCBSZWVkLExpbmVuIHBlbmNpbCBjYXNlLDMsMjQuMDANCkZPLTEwNTcsMjAyNi0wOS0xOCxJcmlzIEhheWVzLEJyYXNzIGJvb2ttYXJrLDEsMTIuMDANCkZPLTEwNTcsMjAyNi0wOS0xOCxJcmlzIEhheWVzLExpbmVuIHBlbmNpbCBjYXNlLDQsMjQuMDANCkZPLTEwNTgsMjAyNi0wOS0xOSxNaXJhIEVsbGlzLEJyYXNzIGJvb2ttYXJrLDMsMTIuMDANCkZPLTEwNTgsMjAyNi0wOS0xOSxNaXJhIEVsbGlzLENlcmFtaWMgZGVzayB0cmF5LDEsMzIuMDANCkZPLTEwNTksMjAyNi0wOS0yMCxUaGVvIEJlbm5ldHQsV2Vla2x5IHBsYW5uZXIsNCwyOC41MA0KRk8tMTA1OSwyMDI2LTA5LTIwLFRoZW8gQmVubmV0dCxFdmVyeWRheSBub3RlYm9vaywyLDE4LjUwDQpGTy0xMDYwLDIwMjYtMDktMjEsQWxleCBNb3JnYW4sV2Vla2x5IHBsYW5uZXIsMSwyOC41MA0KRk8tMTA2MCwyMDI2LTA5LTIxLEFsZXggTW9yZ2FuLEV2ZXJ5ZGF5IG5vdGVib29rLDQsMTguNTANCkZPLTEwNjEsMjAyNi0wOS0yMixMZW5hIEJyb29rcyxMaW5lbiBwZW5jaWwgY2FzZSwyLDI0LjAwDQpGTy0xMDYxLDIwMjYtMDktMjIsTGVuYSBCcm9va3MsQnJhc3MgYm9va21hcmssNSwxMi4wMA0KRk8tMTA2MiwyMDI2LTA5LTIzLE5vYWggUmVlZCxDZXJhbWljIGRlc2sgdHJheSw0LDMyLjAwDQpGTy0xMDYyLDIwMjYtMDktMjMsTm9haCBSZWVkLEJyYXNzIGJvb2ttYXJrLDIsMTIuMDANCkZPLTEwNjMsMjAyNi0wOS0yNCxJcmlzIEhheWVzLENlcmFtaWMgZGVzayB0cmF5LDUsMzIuMDANCkZPLTEwNjMsMjAyNi0wOS0yNCxJcmlzIEhheWVzLFdlZWtseSBwbGFubmVyLDMsMjguNTANCg==",
+    "expected": {
+      "total_rows": 48,
+      "invalid_rows": 0,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "ready",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "FO-1040",
+          "date": "2026-09-01",
+          "customer": "Mira Ellis",
+          "product": "Everyday notebook",
+          "quantity": 1,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 3,
+          "order_id": "FO-1040",
+          "date": "2026-09-01",
+          "customer": "Mira Ellis",
+          "product": "Linen pencil case",
+          "quantity": 4,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 4,
+          "order_id": "FO-1041",
+          "date": "2026-09-02",
+          "customer": "Theo Bennett",
+          "product": "Brass bookmark",
+          "quantity": 2,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 5,
+          "order_id": "FO-1041",
+          "date": "2026-09-02",
+          "customer": "Theo Bennett",
+          "product": "Ceramic desk tray",
+          "quantity": 5,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 6,
+          "order_id": "FO-1042",
+          "date": "2026-09-03",
+          "customer": "Alex Morgan",
+          "product": "Weekly planner",
+          "quantity": 4,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 7,
+          "order_id": "FO-1042",
+          "date": "2026-09-03",
+          "customer": "Alex Morgan",
+          "product": "Ceramic desk tray",
+          "quantity": 2,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 8,
+          "order_id": "FO-1043",
+          "date": "2026-09-04",
+          "customer": "Lena Brooks",
+          "product": "Weekly planner",
+          "quantity": 5,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 9,
+          "order_id": "FO-1043",
+          "date": "2026-09-04",
+          "customer": "Lena Brooks",
+          "product": "Everyday notebook",
+          "quantity": 3,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 10,
+          "order_id": "FO-1044",
+          "date": "2026-09-05",
+          "customer": "Noah Reed",
+          "product": "Linen pencil case",
+          "quantity": 2,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 11,
+          "order_id": "FO-1044",
+          "date": "2026-09-05",
+          "customer": "Noah Reed",
+          "product": "Brass bookmark",
+          "quantity": 5,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 12,
+          "order_id": "FO-1045",
+          "date": "2026-09-06",
+          "customer": "Iris Hayes",
+          "product": "Linen pencil case",
+          "quantity": 3,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 13,
+          "order_id": "FO-1045",
+          "date": "2026-09-06",
+          "customer": "Iris Hayes",
+          "product": "Brass bookmark",
+          "quantity": 1,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 14,
+          "order_id": "FO-1046",
+          "date": "2026-09-07",
+          "customer": "Mira Ellis",
+          "product": "Ceramic desk tray",
+          "quantity": 5,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 15,
+          "order_id": "FO-1046",
+          "date": "2026-09-07",
+          "customer": "Mira Ellis",
+          "product": "Weekly planner",
+          "quantity": 3,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 16,
+          "order_id": "FO-1047",
+          "date": "2026-09-08",
+          "customer": "Theo Bennett",
+          "product": "Everyday notebook",
+          "quantity": 1,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 17,
+          "order_id": "FO-1047",
+          "date": "2026-09-08",
+          "customer": "Theo Bennett",
+          "product": "Weekly planner",
+          "quantity": 4,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 18,
+          "order_id": "FO-1048",
+          "date": "2026-09-09",
+          "customer": "Alex Morgan",
+          "product": "Everyday notebook",
+          "quantity": 3,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 19,
+          "order_id": "FO-1048",
+          "date": "2026-09-09",
+          "customer": "Alex Morgan",
+          "product": "Linen pencil case",
+          "quantity": 1,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 20,
+          "order_id": "FO-1049",
+          "date": "2026-09-10",
+          "customer": "Lena Brooks",
+          "product": "Brass bookmark",
+          "quantity": 4,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 21,
+          "order_id": "FO-1049",
+          "date": "2026-09-10",
+          "customer": "Lena Brooks",
+          "product": "Ceramic desk tray",
+          "quantity": 2,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 22,
+          "order_id": "FO-1050",
+          "date": "2026-09-11",
+          "customer": "Noah Reed",
+          "product": "Brass bookmark",
+          "quantity": 1,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 23,
+          "order_id": "FO-1050",
+          "date": "2026-09-11",
+          "customer": "Noah Reed",
+          "product": "Ceramic desk tray",
+          "quantity": 4,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 24,
+          "order_id": "FO-1051",
+          "date": "2026-09-12",
+          "customer": "Iris Hayes",
+          "product": "Weekly planner",
+          "quantity": 2,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 25,
+          "order_id": "FO-1051",
+          "date": "2026-09-12",
+          "customer": "Iris Hayes",
+          "product": "Everyday notebook",
+          "quantity": 5,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 26,
+          "order_id": "FO-1052",
+          "date": "2026-09-13",
+          "customer": "Mira Ellis",
+          "product": "Linen pencil case",
+          "quantity": 4,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 27,
+          "order_id": "FO-1052",
+          "date": "2026-09-13",
+          "customer": "Mira Ellis",
+          "product": "Everyday notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 28,
+          "order_id": "FO-1053",
+          "date": "2026-09-14",
+          "customer": "Theo Bennett",
+          "product": "Linen pencil case",
+          "quantity": 5,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 29,
+          "order_id": "FO-1053",
+          "date": "2026-09-14",
+          "customer": "Theo Bennett",
+          "product": "Brass bookmark",
+          "quantity": 3,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 30,
+          "order_id": "FO-1054",
+          "date": "2026-09-15",
+          "customer": "Alex Morgan",
+          "product": "Ceramic desk tray",
+          "quantity": 2,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 31,
+          "order_id": "FO-1054",
+          "date": "2026-09-15",
+          "customer": "Alex Morgan",
+          "product": "Weekly planner",
+          "quantity": 5,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 32,
+          "order_id": "FO-1055",
+          "date": "2026-09-16",
+          "customer": "Lena Brooks",
+          "product": "Ceramic desk tray",
+          "quantity": 3,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 33,
+          "order_id": "FO-1055",
+          "date": "2026-09-16",
+          "customer": "Lena Brooks",
+          "product": "Weekly planner",
+          "quantity": 1,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 34,
+          "order_id": "FO-1056",
+          "date": "2026-09-17",
+          "customer": "Noah Reed",
+          "product": "Everyday notebook",
+          "quantity": 5,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 35,
+          "order_id": "FO-1056",
+          "date": "2026-09-17",
+          "customer": "Noah Reed",
+          "product": "Linen pencil case",
+          "quantity": 3,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 36,
+          "order_id": "FO-1057",
+          "date": "2026-09-18",
+          "customer": "Iris Hayes",
+          "product": "Brass bookmark",
+          "quantity": 1,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 37,
+          "order_id": "FO-1057",
+          "date": "2026-09-18",
+          "customer": "Iris Hayes",
+          "product": "Linen pencil case",
+          "quantity": 4,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 38,
+          "order_id": "FO-1058",
+          "date": "2026-09-19",
+          "customer": "Mira Ellis",
+          "product": "Brass bookmark",
+          "quantity": 3,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 39,
+          "order_id": "FO-1058",
+          "date": "2026-09-19",
+          "customer": "Mira Ellis",
+          "product": "Ceramic desk tray",
+          "quantity": 1,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 40,
+          "order_id": "FO-1059",
+          "date": "2026-09-20",
+          "customer": "Theo Bennett",
+          "product": "Weekly planner",
+          "quantity": 4,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 41,
+          "order_id": "FO-1059",
+          "date": "2026-09-20",
+          "customer": "Theo Bennett",
+          "product": "Everyday notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 42,
+          "order_id": "FO-1060",
+          "date": "2026-09-21",
+          "customer": "Alex Morgan",
+          "product": "Weekly planner",
+          "quantity": 1,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 43,
+          "order_id": "FO-1060",
+          "date": "2026-09-21",
+          "customer": "Alex Morgan",
+          "product": "Everyday notebook",
+          "quantity": 4,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 44,
+          "order_id": "FO-1061",
+          "date": "2026-09-22",
+          "customer": "Lena Brooks",
+          "product": "Linen pencil case",
+          "quantity": 2,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 45,
+          "order_id": "FO-1061",
+          "date": "2026-09-22",
+          "customer": "Lena Brooks",
+          "product": "Brass bookmark",
+          "quantity": 5,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 46,
+          "order_id": "FO-1062",
+          "date": "2026-09-23",
+          "customer": "Noah Reed",
+          "product": "Ceramic desk tray",
+          "quantity": 4,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 47,
+          "order_id": "FO-1062",
+          "date": "2026-09-23",
+          "customer": "Noah Reed",
+          "product": "Brass bookmark",
+          "quantity": 2,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 48,
+          "order_id": "FO-1063",
+          "date": "2026-09-24",
+          "customer": "Iris Hayes",
+          "product": "Ceramic desk tray",
+          "quantity": 5,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 49,
+          "order_id": "FO-1063",
+          "date": "2026-09-24",
+          "customer": "Iris Hayes",
+          "product": "Weekly planner",
+          "quantity": 3,
+          "unit_price": "28.50"
+        }
+      ],
+      "issues": [],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "3445.00",
+      "orders": 24,
+      "average_order_value": "143.54",
+      "units": 146,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "114.50"
+        },
+        {
+          "date": "2026-09-02",
+          "revenue": "184.00"
+        },
+        {
+          "date": "2026-09-03",
+          "revenue": "178.00"
+        },
+        {
+          "date": "2026-09-04",
+          "revenue": "198.00"
+        },
+        {
+          "date": "2026-09-05",
+          "revenue": "108.00"
+        },
+        {
+          "date": "2026-09-06",
+          "revenue": "84.00"
+        },
+        {
+          "date": "2026-09-07",
+          "revenue": "245.50"
+        },
+        {
+          "date": "2026-09-08",
+          "revenue": "132.50"
+        },
+        {
+          "date": "2026-09-09",
+          "revenue": "79.50"
+        },
+        {
+          "date": "2026-09-10",
+          "revenue": "112.00"
+        },
+        {
+          "date": "2026-09-11",
+          "revenue": "140.00"
+        },
+        {
+          "date": "2026-09-12",
+          "revenue": "149.50"
+        },
+        {
+          "date": "2026-09-13",
+          "revenue": "133.00"
+        },
+        {
+          "date": "2026-09-14",
+          "revenue": "156.00"
+        },
+        {
+          "date": "2026-09-15",
+          "revenue": "206.50"
+        },
+        {
+          "date": "2026-09-16",
+          "revenue": "124.50"
+        },
+        {
+          "date": "2026-09-17",
+          "revenue": "164.50"
+        },
+        {
+          "date": "2026-09-18",
+          "revenue": "108.00"
+        },
+        {
+          "date": "2026-09-19",
+          "revenue": "68.00"
+        },
+        {
+          "date": "2026-09-20",
+          "revenue": "151.00"
+        },
+        {
+          "date": "2026-09-21",
+          "revenue": "102.50"
+        },
+        {
+          "date": "2026-09-22",
+          "revenue": "108.00"
+        },
+        {
+          "date": "2026-09-23",
+          "revenue": "152.00"
+        },
+        {
+          "date": "2026-09-24",
+          "revenue": "245.50"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Ceramic desk tray",
+          "quantity": 33,
+          "revenue": "1056.00"
+        },
+        {
+          "product": "Weekly planner",
+          "quantity": 32,
+          "revenue": "912.00"
+        },
+        {
+          "product": "Linen pencil case",
+          "quantity": 28,
+          "revenue": "672.00"
+        },
+        {
+          "product": "Brass bookmark",
+          "quantity": 27,
+          "revenue": "324.00"
+        },
+        {
+          "product": "Everyday notebook",
+          "quantity": 26,
+          "revenue": "481.00"
+        }
+      ]
+    }
+  },
+  {
+    "name": "demo-issues",
+    "filename": "demo-issues.csv",
+    "content": "b3JkZXJfaWQsZGF0ZSxjdXN0b21lcixwcm9kdWN0LHF1YW50aXR5LHVuaXRfcHJpY2UNCkZPLTEwNDAsMjAyNi0wOS0wMSwgIE1pcmEgRWxsaXMgICxFdmVyeWRheSBub3RlYm9vaywxLDE4LjUNCkZPLTEwNDAsMjAyNi0wOS0wMSxNaXJhIEVsbGlzLExpbmVuIHBlbmNpbCBjYXNlLDQsMjQuMDANCkZPLTEwNDEsMjAyNi8wOS8wMixUaGVvIEJlbm5ldHQsQnJhc3MgYm9va21hcmssMiwxMi4wMA0KRk8tMTA0MSwyMDI2LTA5LTAyLFRoZW8gQmVubmV0dCxDZXJhbWljIGRlc2sgdHJheSw1LDMyLjAwDQpGTy0xMDQyLDIwMjYtMDktMDMsQWxleCBNb3JnYW4sV2Vla2x5IHBsYW5uZXIsNCwyOC41MA0KRk8tMTA0MiwyMDI2LTA5LTAzLEFsZXggTW9yZ2FuLENlcmFtaWMgZGVzayB0cmF5LDIsMzIuMDANCkZPLTEwNDMsMjAyNi0wOS0wNCxMZW5hIEJyb29rcyxXZWVrbHkgcGxhbm5lciw1LDI4LjUwDQpGTy0xMDQzLDIwMjYtMDktMDQsTGVuYSBCcm9va3MsRXZlcnlkYXkgbm90ZWJvb2ssMywxOC41MA0KRk8tMTA0NCwyMDI2LTA5LTA1LE5vYWggUmVlZCxMaW5lbiBwZW5jaWwgY2FzZSwyLDI0LjAwDQpGTy0xMDQ0LDIwMjYtMDktMDUsTm9haCBSZWVkLEJyYXNzIGJvb2ttYXJrLDUsMTIuMDANCkZPLTEwNDUsMjAyNi0wOS0wNixJcmlzIEhheWVzLExpbmVuIHBlbmNpbCBjYXNlLDMsMjQuMDANCkZPLTEwNDUsMjAyNi0wOS0wNixJcmlzIEhheWVzLEJyYXNzIGJvb2ttYXJrLDEsMTIuMDANCkZPLTEwNDYsMjAyNi0wOS0wNyxNaXJhIEVsbGlzLENlcmFtaWMgZGVzayB0cmF5LDUsMzIuMDANCkZPLTEwNDYsMjAyNi0wOS0wNyxNaXJhIEVsbGlzLFdlZWtseSBwbGFubmVyLDMsMjguNTANCkZPLTEwNDcsMjAyNi0wOS0wOCxUaGVvIEJlbm5ldHQsRXZlcnlkYXkgbm90ZWJvb2ssMSwxOC41MA0KRk8tMTA0NywyMDI2LTA5LTA4LFRoZW8gQmVubmV0dCxXZWVrbHkgcGxhbm5lciw0LDI4LjUwDQpGTy0xMDQ4LDIwMjYtMDktMDksQWxleCBNb3JnYW4sRXZlcnlkYXkgbm90ZWJvb2ssMywxOC41MA0KRk8tMTA0OCwyMDI2LTA5LTA5LEFsZXggTW9yZ2FuLExpbmVuIHBlbmNpbCBjYXNlLDEsMjQuMDANCkZPLTEwNDksMjAyNi0wOS0xMCxMZW5hIEJyb29rcyxCcmFzcyBib29rbWFyayw0LDEyLjAwDQpGTy0xMDQ5LDIwMjYtMDktMTAsTGVuYSBCcm9va3MsQ2VyYW1pYyBkZXNrIHRyYXksMiwzMi4wMA0KRk8tMTA1MCwyMDI2LTA5LTExLE5vYWggUmVlZCxCcmFzcyBib29rbWFyaywxLDEyLjAwDQpGTy0xMDUwLDIwMjYtMDktMTEsTm9haCBSZWVkLENlcmFtaWMgZGVzayB0cmF5LDQsMzIuMDANCkZPLTEwNTEsMjAyNi0wOS0xMixJcmlzIEhheWVzLFdlZWtseSBwbGFubmVyLDIsMjguNTANCkZPLTEwNTEsMjAyNi0wOS0xMixJcmlzIEhheWVzLEV2ZXJ5ZGF5IG5vdGVib29rLDUsMTguNTANCkZPLTEwNTIsMjAyNi0wOS0xMyxNaXJhIEVsbGlzLExpbmVuIHBlbmNpbCBjYXNlLDQsMjQuMDANCkZPLTEwNTIsMjAyNi0wOS0xMyxNaXJhIEVsbGlzLEV2ZXJ5ZGF5IG5vdGVib29rLDIsMTguNTANCkZPLTEwNTMsMjAyNi0wOS0xNCxUaGVvIEJlbm5ldHQsTGluZW4gcGVuY2lsIGNhc2UsNSwyNC4wMA0KRk8tMTA1MywyMDI2LTA5LTE0LFRoZW8gQmVubmV0dCxCcmFzcyBib29rbWFyaywzLDEyLjAwDQpGTy0xMDU0LDIwMjYtMDktMTUsQWxleCBNb3JnYW4sQ2VyYW1pYyBkZXNrIHRyYXksMiwzMi4wMA0KRk8tMTA1NCwyMDI2LTA5LTE1LEFsZXggTW9yZ2FuLFdlZWtseSBwbGFubmVyLDUsMjguNTANCkZPLTEwNTUsMjAyNi0wOS0xNixMZW5hIEJyb29rcyxDZXJhbWljIGRlc2sgdHJheSwzLDMyLjAwDQpGTy0xMDU1LDIwMjYtMDktMTYsTGVuYSBCcm9va3MsV2Vla2x5IHBsYW5uZXIsMSwyOC41MA0KRk8tMTA1NiwyMDI2LTA5LTE3LE5vYWggUmVlZCxFdmVyeWRheSBub3RlYm9vayw1LDE4LjUwDQpGTy0xMDU2LDIwMjYtMDktMTcsTm9haCBSZWVkLExpbmVuIHBlbmNpbCBjYXNlLDMsMjQuMDANCkZPLTEwNTcsMjAyNi0wOS0xOCxJcmlzIEhheWVzLEJyYXNzIGJvb2ttYXJrLDEsMTIuMDANCkZPLTEwNTcsMjAyNi0wOS0xOCxJcmlzIEhheWVzLExpbmVuIHBlbmNpbCBjYXNlLDQsMjQuMDANCkZPLTEwNTgsMjAyNi0wOS0xOSxNaXJhIEVsbGlzLEJyYXNzIGJvb2ttYXJrLDMsMTIuMDANCkZPLTEwNTgsMjAyNi0wOS0xOSxNaXJhIEVsbGlzLENlcmFtaWMgZGVzayB0cmF5LDEsMzIuMDANCkZPLTEwNTksMjAyNi0wOS0yMCxUaGVvIEJlbm5ldHQsV2Vla2x5IHBsYW5uZXIsNCwyOC41MA0KRk8tMTA1OSwyMDI2LTA5LTIwLFRoZW8gQmVubmV0dCxFdmVyeWRheSBub3RlYm9vaywyLDE4LjUwDQpGTy0xMDYwLDIwMjYtMDktMjEsQWxleCBNb3JnYW4sV2Vla2x5IHBsYW5uZXIsMSwyOC41MA0KRk8tMTA2MCwyMDI2LTA5LTIxLEFsZXggTW9yZ2FuLEV2ZXJ5ZGF5IG5vdGVib29rLDQsMTguNTANCkZPLTEwNjEsMjAyNi0wOS0yMixMZW5hIEJyb29rcyxMaW5lbiBwZW5jaWwgY2FzZSwyLDI0LjAwDQpGTy0xMDYxLDIwMjYtMDktMjIsTGVuYSBCcm9va3MsQnJhc3MgYm9va21hcmssNSwxMi4wMA0KRk8tMTA2MiwyMDI2LTA5LTIzLE5vYWggUmVlZCxDZXJhbWljIGRlc2sgdHJheSw0LDMyLjAwDQpGTy0xMDYyLDIwMjYtMDktMjMsTm9haCBSZWVkLEJyYXNzIGJvb2ttYXJrLDIsMTIuMDANCkZPLTEwNjMsMjAyNi0wOS0yNCxJcmlzIEhheWVzLENlcmFtaWMgZGVzayB0cmF5LDUsMzIuMDANCkZPLTEwNjMsMjAyNi0wOS0yNCxJcmlzIEhheWVzLFdlZWtseSBwbGFubmVyLDMsMjguNTANCkZPLTEwNDAsMjAyNi0wOS0wMSxNaXJhIEVsbGlzLExpbmVuIHBlbmNpbCBjYXNlLDQsMjQuMDANCkZPLTEwNDAsMjAyNi0wOS0wMSxNaXJhIEVsbGlzLEV2ZXJ5ZGF5IG5vdGVib29rLDEsMTguNTANCkZPLTkwMDEsMjAyNi0wMi0zMCxJcmlzIEhheWVzLFdlZWtseSBwbGFubmVyLDEsMjguNTANCkZPLTkwMDIsMjAyNi0wOS0wNCwsQnJhc3MgYm9va21hcmssMiwxMi4wMA0KRk8tOTAwMywyMDI2LTA5LTA1LFRoZW8gQmVubmV0dCxMaW5lbiBwZW5jaWwgY2FzZSwwLDI0LjAwDQpGTy05MDA0LDIwMjYtMDktMDYsQWxleCBNb3JnYW4sQ2VyYW1pYyBkZXNrIHRyYXksMSwtMzIuMDANCkZPLTkwMTAsMjAyNi0wOS0xMCxMZW5hIEJyb29rcyxXZWVrbHkgcGxhbm5lciwxLDI4LjUwDQpGTy05MDEwLDIwMjYtMDktMTEsTm9haCBSZWVkLEJyYXNzIGJvb2ttYXJrLDIsMTIuMDANCg==",
+    "expected": {
+      "total_rows": 56,
+      "invalid_rows": 6,
+      "duplicate_rows": 2,
+      "normalized_rows": 2,
+      "status": "needs_review",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "FO-1040",
+          "date": "2026-09-01",
+          "customer": "Mira Ellis",
+          "product": "Everyday notebook",
+          "quantity": 1,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 3,
+          "order_id": "FO-1040",
+          "date": "2026-09-01",
+          "customer": "Mira Ellis",
+          "product": "Linen pencil case",
+          "quantity": 4,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 4,
+          "order_id": "FO-1041",
+          "date": "2026-09-02",
+          "customer": "Theo Bennett",
+          "product": "Brass bookmark",
+          "quantity": 2,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 5,
+          "order_id": "FO-1041",
+          "date": "2026-09-02",
+          "customer": "Theo Bennett",
+          "product": "Ceramic desk tray",
+          "quantity": 5,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 6,
+          "order_id": "FO-1042",
+          "date": "2026-09-03",
+          "customer": "Alex Morgan",
+          "product": "Weekly planner",
+          "quantity": 4,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 7,
+          "order_id": "FO-1042",
+          "date": "2026-09-03",
+          "customer": "Alex Morgan",
+          "product": "Ceramic desk tray",
+          "quantity": 2,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 8,
+          "order_id": "FO-1043",
+          "date": "2026-09-04",
+          "customer": "Lena Brooks",
+          "product": "Weekly planner",
+          "quantity": 5,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 9,
+          "order_id": "FO-1043",
+          "date": "2026-09-04",
+          "customer": "Lena Brooks",
+          "product": "Everyday notebook",
+          "quantity": 3,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 10,
+          "order_id": "FO-1044",
+          "date": "2026-09-05",
+          "customer": "Noah Reed",
+          "product": "Linen pencil case",
+          "quantity": 2,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 11,
+          "order_id": "FO-1044",
+          "date": "2026-09-05",
+          "customer": "Noah Reed",
+          "product": "Brass bookmark",
+          "quantity": 5,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 12,
+          "order_id": "FO-1045",
+          "date": "2026-09-06",
+          "customer": "Iris Hayes",
+          "product": "Linen pencil case",
+          "quantity": 3,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 13,
+          "order_id": "FO-1045",
+          "date": "2026-09-06",
+          "customer": "Iris Hayes",
+          "product": "Brass bookmark",
+          "quantity": 1,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 14,
+          "order_id": "FO-1046",
+          "date": "2026-09-07",
+          "customer": "Mira Ellis",
+          "product": "Ceramic desk tray",
+          "quantity": 5,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 15,
+          "order_id": "FO-1046",
+          "date": "2026-09-07",
+          "customer": "Mira Ellis",
+          "product": "Weekly planner",
+          "quantity": 3,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 16,
+          "order_id": "FO-1047",
+          "date": "2026-09-08",
+          "customer": "Theo Bennett",
+          "product": "Everyday notebook",
+          "quantity": 1,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 17,
+          "order_id": "FO-1047",
+          "date": "2026-09-08",
+          "customer": "Theo Bennett",
+          "product": "Weekly planner",
+          "quantity": 4,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 18,
+          "order_id": "FO-1048",
+          "date": "2026-09-09",
+          "customer": "Alex Morgan",
+          "product": "Everyday notebook",
+          "quantity": 3,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 19,
+          "order_id": "FO-1048",
+          "date": "2026-09-09",
+          "customer": "Alex Morgan",
+          "product": "Linen pencil case",
+          "quantity": 1,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 20,
+          "order_id": "FO-1049",
+          "date": "2026-09-10",
+          "customer": "Lena Brooks",
+          "product": "Brass bookmark",
+          "quantity": 4,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 21,
+          "order_id": "FO-1049",
+          "date": "2026-09-10",
+          "customer": "Lena Brooks",
+          "product": "Ceramic desk tray",
+          "quantity": 2,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 22,
+          "order_id": "FO-1050",
+          "date": "2026-09-11",
+          "customer": "Noah Reed",
+          "product": "Brass bookmark",
+          "quantity": 1,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 23,
+          "order_id": "FO-1050",
+          "date": "2026-09-11",
+          "customer": "Noah Reed",
+          "product": "Ceramic desk tray",
+          "quantity": 4,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 24,
+          "order_id": "FO-1051",
+          "date": "2026-09-12",
+          "customer": "Iris Hayes",
+          "product": "Weekly planner",
+          "quantity": 2,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 25,
+          "order_id": "FO-1051",
+          "date": "2026-09-12",
+          "customer": "Iris Hayes",
+          "product": "Everyday notebook",
+          "quantity": 5,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 26,
+          "order_id": "FO-1052",
+          "date": "2026-09-13",
+          "customer": "Mira Ellis",
+          "product": "Linen pencil case",
+          "quantity": 4,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 27,
+          "order_id": "FO-1052",
+          "date": "2026-09-13",
+          "customer": "Mira Ellis",
+          "product": "Everyday notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 28,
+          "order_id": "FO-1053",
+          "date": "2026-09-14",
+          "customer": "Theo Bennett",
+          "product": "Linen pencil case",
+          "quantity": 5,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 29,
+          "order_id": "FO-1053",
+          "date": "2026-09-14",
+          "customer": "Theo Bennett",
+          "product": "Brass bookmark",
+          "quantity": 3,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 30,
+          "order_id": "FO-1054",
+          "date": "2026-09-15",
+          "customer": "Alex Morgan",
+          "product": "Ceramic desk tray",
+          "quantity": 2,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 31,
+          "order_id": "FO-1054",
+          "date": "2026-09-15",
+          "customer": "Alex Morgan",
+          "product": "Weekly planner",
+          "quantity": 5,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 32,
+          "order_id": "FO-1055",
+          "date": "2026-09-16",
+          "customer": "Lena Brooks",
+          "product": "Ceramic desk tray",
+          "quantity": 3,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 33,
+          "order_id": "FO-1055",
+          "date": "2026-09-16",
+          "customer": "Lena Brooks",
+          "product": "Weekly planner",
+          "quantity": 1,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 34,
+          "order_id": "FO-1056",
+          "date": "2026-09-17",
+          "customer": "Noah Reed",
+          "product": "Everyday notebook",
+          "quantity": 5,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 35,
+          "order_id": "FO-1056",
+          "date": "2026-09-17",
+          "customer": "Noah Reed",
+          "product": "Linen pencil case",
+          "quantity": 3,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 36,
+          "order_id": "FO-1057",
+          "date": "2026-09-18",
+          "customer": "Iris Hayes",
+          "product": "Brass bookmark",
+          "quantity": 1,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 37,
+          "order_id": "FO-1057",
+          "date": "2026-09-18",
+          "customer": "Iris Hayes",
+          "product": "Linen pencil case",
+          "quantity": 4,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 38,
+          "order_id": "FO-1058",
+          "date": "2026-09-19",
+          "customer": "Mira Ellis",
+          "product": "Brass bookmark",
+          "quantity": 3,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 39,
+          "order_id": "FO-1058",
+          "date": "2026-09-19",
+          "customer": "Mira Ellis",
+          "product": "Ceramic desk tray",
+          "quantity": 1,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 40,
+          "order_id": "FO-1059",
+          "date": "2026-09-20",
+          "customer": "Theo Bennett",
+          "product": "Weekly planner",
+          "quantity": 4,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 41,
+          "order_id": "FO-1059",
+          "date": "2026-09-20",
+          "customer": "Theo Bennett",
+          "product": "Everyday notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 42,
+          "order_id": "FO-1060",
+          "date": "2026-09-21",
+          "customer": "Alex Morgan",
+          "product": "Weekly planner",
+          "quantity": 1,
+          "unit_price": "28.50"
+        },
+        {
+          "source_row": 43,
+          "order_id": "FO-1060",
+          "date": "2026-09-21",
+          "customer": "Alex Morgan",
+          "product": "Everyday notebook",
+          "quantity": 4,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 44,
+          "order_id": "FO-1061",
+          "date": "2026-09-22",
+          "customer": "Lena Brooks",
+          "product": "Linen pencil case",
+          "quantity": 2,
+          "unit_price": "24.00"
+        },
+        {
+          "source_row": 45,
+          "order_id": "FO-1061",
+          "date": "2026-09-22",
+          "customer": "Lena Brooks",
+          "product": "Brass bookmark",
+          "quantity": 5,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 46,
+          "order_id": "FO-1062",
+          "date": "2026-09-23",
+          "customer": "Noah Reed",
+          "product": "Ceramic desk tray",
+          "quantity": 4,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 47,
+          "order_id": "FO-1062",
+          "date": "2026-09-23",
+          "customer": "Noah Reed",
+          "product": "Brass bookmark",
+          "quantity": 2,
+          "unit_price": "12.00"
+        },
+        {
+          "source_row": 48,
+          "order_id": "FO-1063",
+          "date": "2026-09-24",
+          "customer": "Iris Hayes",
+          "product": "Ceramic desk tray",
+          "quantity": 5,
+          "unit_price": "32.00"
+        },
+        {
+          "source_row": 49,
+          "order_id": "FO-1063",
+          "date": "2026-09-24",
+          "customer": "Iris Hayes",
+          "product": "Weekly planner",
+          "quantity": 3,
+          "unit_price": "28.50"
+        }
+      ],
+      "issues": [
+        {
+          "row": 50,
+          "column": "row",
+          "code": "duplicate"
+        },
+        {
+          "row": 51,
+          "column": "row",
+          "code": "normalized_duplicate"
+        },
+        {
+          "row": 52,
+          "column": "date",
+          "code": "invalid_date"
+        },
+        {
+          "row": 53,
+          "column": "customer",
+          "code": "invalid_value"
+        },
+        {
+          "row": 54,
+          "column": "quantity",
+          "code": "invalid_quantity"
+        },
+        {
+          "row": 55,
+          "column": "unit_price",
+          "code": "invalid_unit_price"
+        },
+        {
+          "row": 56,
+          "column": "order_id",
+          "code": "order_conflict"
+        },
+        {
+          "row": 57,
+          "column": "order_id",
+          "code": "order_conflict"
+        }
+      ],
+      "changes": [
+        {
+          "row": 2,
+          "column": "customer",
+          "code": "whitespace",
+          "message": "Trimmed surrounding whitespace."
+        },
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "format",
+          "message": "Normalized 18.5 to 18.50."
+        },
+        {
+          "row": 4,
+          "column": "date",
+          "code": "format",
+          "message": "Normalized 2026/09/02 to 2026-09-02."
+        }
+      ],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "3445.00",
+      "orders": 24,
+      "average_order_value": "143.54",
+      "units": 146,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "114.50"
+        },
+        {
+          "date": "2026-09-02",
+          "revenue": "184.00"
+        },
+        {
+          "date": "2026-09-03",
+          "revenue": "178.00"
+        },
+        {
+          "date": "2026-09-04",
+          "revenue": "198.00"
+        },
+        {
+          "date": "2026-09-05",
+          "revenue": "108.00"
+        },
+        {
+          "date": "2026-09-06",
+          "revenue": "84.00"
+        },
+        {
+          "date": "2026-09-07",
+          "revenue": "245.50"
+        },
+        {
+          "date": "2026-09-08",
+          "revenue": "132.50"
+        },
+        {
+          "date": "2026-09-09",
+          "revenue": "79.50"
+        },
+        {
+          "date": "2026-09-10",
+          "revenue": "112.00"
+        },
+        {
+          "date": "2026-09-11",
+          "revenue": "140.00"
+        },
+        {
+          "date": "2026-09-12",
+          "revenue": "149.50"
+        },
+        {
+          "date": "2026-09-13",
+          "revenue": "133.00"
+        },
+        {
+          "date": "2026-09-14",
+          "revenue": "156.00"
+        },
+        {
+          "date": "2026-09-15",
+          "revenue": "206.50"
+        },
+        {
+          "date": "2026-09-16",
+          "revenue": "124.50"
+        },
+        {
+          "date": "2026-09-17",
+          "revenue": "164.50"
+        },
+        {
+          "date": "2026-09-18",
+          "revenue": "108.00"
+        },
+        {
+          "date": "2026-09-19",
+          "revenue": "68.00"
+        },
+        {
+          "date": "2026-09-20",
+          "revenue": "151.00"
+        },
+        {
+          "date": "2026-09-21",
+          "revenue": "102.50"
+        },
+        {
+          "date": "2026-09-22",
+          "revenue": "108.00"
+        },
+        {
+          "date": "2026-09-23",
+          "revenue": "152.00"
+        },
+        {
+          "date": "2026-09-24",
+          "revenue": "245.50"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Ceramic desk tray",
+          "quantity": 33,
+          "revenue": "1056.00"
+        },
+        {
+          "product": "Weekly planner",
+          "quantity": 32,
+          "revenue": "912.00"
+        },
+        {
+          "product": "Linen pencil case",
+          "quantity": 28,
+          "revenue": "672.00"
+        },
+        {
+          "product": "Brass bookmark",
+          "quantity": 27,
+          "revenue": "324.00"
+        },
+        {
+          "product": "Everyday notebook",
+          "quantity": 26,
+          "revenue": "481.00"
+        }
+      ]
+    }
+  },
+  {
+    "name": "excel-date",
+    "filename": "excel-date.xlsx",
+    "content": "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",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 0,
+      "duplicate_rows": 0,
+      "normalized_rows": 1,
+      "status": "ready",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "001",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        }
+      ],
+      "issues": [],
+      "changes": [
+        {
+          "row": 2,
+          "column": "date",
+          "code": "format",
+          "message": "Normalized 2026-09-01T00:00:00 to 2026-09-01."
+        }
+      ],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "37.00",
+      "orders": 1,
+      "average_order_value": "37.00",
+      "units": 2,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "37.00"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Notebook",
+          "quantity": 2,
+          "revenue": "37.00"
+        }
+      ]
+    }
+  },
+  {
+    "name": "excel-time",
+    "filename": "excel-time.xlsx",
+    "content": "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",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "date",
+          "code": "invalid_date"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "excel-formula",
+    "filename": "excel-formula.xlsx",
+    "content": "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",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "no_valid_rows",
+      "records": [],
+      "issues": [
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "invalid_value"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "0.00",
+      "orders": 0,
+      "average_order_value": "0.00",
+      "units": 0,
+      "revenue_over_time": [],
+      "top_products": []
+    }
+  },
+  {
+    "name": "excel-blank",
+    "filename": "excel-blank.xlsx",
+    "content": "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",
+    "expected": {
+      "total_rows": 3,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "needs_review",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "001",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        },
+        {
+          "source_row": 4,
+          "order_id": "2",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        }
+      ],
+      "issues": [
+        {
+          "row": 3,
+          "column": "customer",
+          "code": "invalid_value"
+        },
+        {
+          "row": 3,
+          "column": "date",
+          "code": "invalid_value"
+        },
+        {
+          "row": 3,
+          "column": "order_id",
+          "code": "invalid_value"
+        },
+        {
+          "row": 3,
+          "column": "product",
+          "code": "invalid_value"
+        },
+        {
+          "row": 3,
+          "column": "quantity",
+          "code": "invalid_value"
+        },
+        {
+          "row": 3,
+          "column": "unit_price",
+          "code": "invalid_value"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "74.00",
+      "orders": 2,
+      "average_order_value": "37.00",
+      "units": 4,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "74.00"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Notebook",
+          "quantity": 4,
+          "revenue": "74.00"
+        }
+      ]
+    }
+  },
+  {
+    "name": "excel-leading-blank",
+    "filename": "excel-leading-blank.xlsx",
+    "content": "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",
+    "expected": {
+      "total_rows": 2,
+      "invalid_rows": 1,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "needs_review",
+      "records": [
+        {
+          "source_row": 3,
+          "order_id": "001",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        }
+      ],
+      "issues": [
+        {
+          "row": 2,
+          "column": "customer",
+          "code": "invalid_value"
+        },
+        {
+          "row": 2,
+          "column": "date",
+          "code": "invalid_value"
+        },
+        {
+          "row": 2,
+          "column": "order_id",
+          "code": "invalid_value"
+        },
+        {
+          "row": 2,
+          "column": "product",
+          "code": "invalid_value"
+        },
+        {
+          "row": 2,
+          "column": "quantity",
+          "code": "invalid_value"
+        },
+        {
+          "row": 2,
+          "column": "unit_price",
+          "code": "invalid_value"
+        }
+      ],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "37.00",
+      "orders": 1,
+      "average_order_value": "37.00",
+      "units": 2,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "37.00"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Notebook",
+          "quantity": 2,
+          "revenue": "37.00"
+        }
+      ]
+    }
+  },
+  {
+    "name": "excel-trailing-blank",
+    "filename": "excel-trailing-blank.xlsx",
+    "content": "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",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 0,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "ready",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "001",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        }
+      ],
+      "issues": [],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "37.00",
+      "orders": 1,
+      "average_order_value": "37.00",
+      "units": 2,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "37.00"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Notebook",
+          "quantity": 2,
+          "revenue": "37.00"
+        }
+      ]
+    }
+  },
+  {
+    "name": "excel-1904",
+    "filename": "excel-1904.xlsx",
+    "content": "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",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 0,
+      "duplicate_rows": 0,
+      "normalized_rows": 1,
+      "status": "ready",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "001",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        }
+      ],
+      "issues": [],
+      "changes": [
+        {
+          "row": 2,
+          "column": "date",
+          "code": "format",
+          "message": "Normalized 2026-09-01T00:00:00 to 2026-09-01."
+        }
+      ],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "37.00",
+      "orders": 1,
+      "average_order_value": "37.00",
+      "units": 2,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "37.00"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Notebook",
+          "quantity": 2,
+          "revenue": "37.00"
+        }
+      ]
+    }
+  },
+  {
+    "name": "excel-multiple",
+    "filename": "excel-multiple.xlsx",
+    "content": "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",
+    "error": "multiple_sheets"
+  },
+  {
+    "name": "excel-invalid",
+    "filename": "excel-invalid.xlsx",
+    "content": "bm90IGV4Y2Vs",
+    "error": "malformed_xlsx"
+  },
+  {
+    "name": "excel-bad-xml",
+    "filename": "excel-bad-xml.xlsx",
+    "content": "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",
+    "error": "malformed_xlsx"
+  },
+  {
+    "name": "excel-fake-dimension",
+    "filename": "excel-fake-dimension.xlsx",
+    "content": "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",
+    "expected": {
+      "total_rows": 1,
+      "invalid_rows": 0,
+      "duplicate_rows": 0,
+      "normalized_rows": 0,
+      "status": "ready",
+      "records": [
+        {
+          "source_row": 2,
+          "order_id": "001",
+          "date": "2026-09-01",
+          "customer": "Mira",
+          "product": "Notebook",
+          "quantity": 2,
+          "unit_price": "18.50"
+        }
+      ],
+      "issues": [],
+      "changes": [],
+      "column_changes": []
+    },
+    "analytics": {
+      "revenue": "37.00",
+      "orders": 1,
+      "average_order_value": "37.00",
+      "units": 2,
+      "revenue_over_time": [
+        {
+          "date": "2026-09-01",
+          "revenue": "37.00"
+        }
+      ],
+      "top_products": [
+        {
+          "product": "Notebook",
+          "quantity": 2,
+          "revenue": "37.00"
+        }
+      ]
+    }
+  }
+]

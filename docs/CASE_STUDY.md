@@ -1,34 +1,33 @@
-# FlowOps — sales spreadsheet review
+# FlowOps: sales spreadsheet review
 
-## Problem
+Sales exports can contain copied rows, inconsistent formats, and conflicting order details. FlowOps makes those problems visible before showing revenue.
 
-Sales exports can contain duplicate items, inconsistent number formats, and incomplete orders. A useful report needs to show which rows were accepted and explain exclusions before presenting revenue.
+## Workflow
 
-## Solution
+Import a CSV or XLSX and choose its currency. FlowOps validates the six required columns, normalizes accepted values, and separates valid lines from exclusions. The report includes sales metrics, charts, searchable cleaned data, issues, and changes. Users can export the cleaned data, fix the original file, and import it again.
 
-FlowOps takes a CSV or XLSX file, applies an explicit review policy, and produces an interactive sales report with cleaned exports and a downloadable issues checklist. One-click fictional demos let a visitor inspect the workflow without creating repeated imports. Currency is chosen per file; ambiguous order identities are excluded for review.
+The public browser app processes user-selected files in a Web Worker. Nothing in those files is sent to a server. IndexedDB keeps the last 10 reports, with reopening and deletion. Prepared fictional examples let visitors explore the interface before importing.
 
-## My role
+## Design choices
 
-I am the author of this demonstration project, responsible for its workflow, frontend, backend, data model, validation rules, tests, and local delivery setup. It is a portfolio project, not a commissioned client engagement. All example names, orders, and amounts are fictional; no client results or time-saving claims are implied.
+- Compare duplicates after normalization so formatting differences do not inflate sales.
+- Exclude every line of an order when its date or customer conflicts; do not guess which identity is correct.
+- Use integer cents for exact totals, including inputs at the supported numeric limits.
+- Keep source row references and explain exclusions. Record changes only for accepted lines.
+- Keep processing off the interface thread and support cancellation. A history failure must not discard a completed report.
 
-## Key screens
+## Implementation
 
-1. [Overview](screenshots/01-overview.png): the business task and one-click demo entry.
-2. [Sales report](screenshots/02-sales-report.png): revenue, order metrics, daily trend, and leading products.
-3. [Issues](screenshots/03-issues.png): original row references, exclusion codes, explanations, and exports.
-4. [Changes](screenshots/04-changes.png): accepted values normalized during processing.
-5. [Import](screenshots/05-import.png): explicit currency selection and file requirements.
-6. [Mobile report](screenshots/06-mobile-report.png): the same workflow at 375 px.
+The public app uses React, TypeScript, Vite, Recharts, SheetJS, Web Workers, and IndexedDB. Render serves the static build from `demo/`.
 
-Suggested walkthrough: Explore demo → Example with issues → Issues → Changes → download the source → import it with USD selected → download cleaned CSV/XLSX → reopen the result from history.
+A separate local app uses the same interface and review policy with FastAPI, pandas, openpyxl, SQLAlchemy, Alembic, and PostgreSQL. It sends files to a local API and stores reports in the database. Docker Compose provides a local setup. This server configuration has no authentication or user isolation and is not a public upload service.
 
-## Stack
+Python-generated fixtures compare the browser processor with the existing Python implementation. Unit tests cover exact totals, exports, limits, and history. Browser checks exercise the production build. See [QA notes](QA.md) for evidence and limits.
 
-React, TypeScript, Vite, Tailwind CSS, Recharts; Python, FastAPI, pandas, openpyxl, SQLAlchemy, Alembic, PostgreSQL. Pytest and Vitest cover processing and user interactions; Ruff, mypy, ESLint, TypeScript, and CI check the code. Docker Compose and a native setup support local review.
+## Scope
 
-## Boundaries
+This is a portfolio project, not a client engagement. All prepared data is fictional. No customer results or time savings are claimed.
 
-Local single-user use only: no authentication or private tenant storage. Maximum upload: 5 MB / 10,000 rows, one currency and one worksheet per file. Identical real items cannot be distinguished from copied rows without a line ID, so the report asks the user to review them. No currency conversion, tax calculation, refunds, or background jobs. Raw files are not saved; validated records and reports are retained. No public demo has been deployed.
+Both versions support files up to 5 MiB and 10,000 data rows, one worksheet, and one selected currency. They do not calculate taxes, refunds, or currency conversions. Without line IDs, identical real items remain ambiguous. Browser history belongs to one device and can be removed by browser storage cleanup.
 
-See [QA notes](QA.md) for checks actually executed and their limits.
+The [existing screenshots](screenshots/) show the earlier local full stack interface. They are not evidence of the current public deployment; the current browser QA script writes new captures to `artifacts/browser-demo/`.

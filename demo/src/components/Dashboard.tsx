@@ -66,7 +66,9 @@ export function Dashboard({
           <a href="#/demo/clean" className="button button-secondary">
             Explore demo
           </a>
-          <a href="#/demo/issues" className="button button-primary">Example with issues</a>
+          <a href="#/import" className="button button-primary">
+            Import your file <ArrowRight size={16} />
+          </a>
         </div>
       </div>
       {demo && <DemoBanner kind={demo} />}
